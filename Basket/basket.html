@@ -1,0 +1,169 @@
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: #F5F5F5;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Container for Basket Page */
+    .basket-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #1E1E3F;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: #F5F5F5;
+        display: flex;
+        flex-direction: column;
+        height: 90vh; /* Maintain fixed height */
+    }
+
+    .basket-title {
+        font-family: 'Montserrat', sans-serif;
+        color: #00FF7F;
+        text-align: center;
+        font-size: 24px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .basket-items {
+        flex: 1;
+        overflow-y: auto; /* Makes the product list scrollable */
+        padding-right: 10px; /* Adds spacing for the scrollbar */
+    }
+
+    .basket-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: #2D2D4E;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    .basket-item-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .basket-item-info span {
+        margin: 5px 0;
+    }
+
+    .basket-item-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-btn {
+        background-color: #00FF7F;
+        color: #1E1E3F;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .quantity-btn:hover {
+        background-color: #007BFF;
+        color: #F5F5F5;
+    }
+
+    .quantity-display {
+        width: 40px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        background-color: #00FF7F;
+        color: #1E1E3F;
+        border: none;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        text-transform: uppercase;
+        margin-top: 10px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .checkout-btn:hover {
+        background-color: #007BFF;
+        color: #F5F5F5;
+    }
+</style>
+
+<div class="basket-container">
+    <h1 class="basket-title">Your Basket</h1>
+
+    <!-- Scrollable Basket Items -->
+    <div class="basket-items">
+        <!-- Basket Item 1 -->
+        <div class="basket-item">
+            <div class="basket-item-info">
+                <span><strong>Product Name:</strong> Graphics Card</span>
+                <span><strong>Stock:</strong> Available</span>
+            </div>
+            <div class="basket-item-controls">
+                <button class="quantity-btn" onclick="decreaseQuantity(1)">-</button>
+                <input type="text" id="quantity-1" class="quantity-display" value="1" readonly>
+                <button class="quantity-btn" onclick="increaseQuantity(1)">+</button>
+            </div>
+        </div>
+
+        <!-- Basket Item 2 -->
+        <div class="basket-item">
+            <div class="basket-item-info">
+                <span><strong>Product Name:</strong> CPU Cooler</span>
+                <span><strong>Stock:</strong> Limited</span>
+            </div>
+            <div class="basket-item-controls">
+                <button class="quantity-btn" onclick="decreaseQuantity(2)">-</button>
+                <input type="text" id="quantity-2" class="quantity-display" value="1" readonly>
+                <button class="quantity-btn" onclick="increaseQuantity(2)">+</button>
+            </div>
+        </div>
+
+        <!-- Additional items -->
+        <!-- Add more basket-item divs dynamically -->
+    </div>
+
+    <!-- Checkout Button -->
+    <button class="checkout-btn" onclick="proceedToCheckout()">Checkout</button>
+</div>
+
+<script>
+    // JavaScript for Quantity Controls
+    function increaseQuantity(id) {
+        const quantityInput = document.getElementById(`quantity-${id}`);
+        let currentQuantity = parseInt(quantityInput.value);
+        quantityInput.value = currentQuantity + 1;
+    }
+
+    function decreaseQuantity(id) {
+        const quantityInput = document.getElementById(`quantity-${id}`);
+        let currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity > 1) {
+            quantityInput.value = currentQuantity - 1;
+        }
+    }
+
+    function proceedToCheckout() {
+        alert("Proceeding to Checkout!");
+        // Add logic to navigate to checkout page or process basket items
+    }
+</script>
