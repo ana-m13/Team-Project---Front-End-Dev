@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | BitWise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Centered Container */
+        .signup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full-screen height */
+            padding-top: 50px; /* Add extra white space at the top */
+            padding-bottom: 50px; /* Add extra white space at the bottom */
+            background-color: #F5F5F5;
+        }
+
+        .signup-box {
+            background-color: #1E1E3F;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .signup-box h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #00FF7F;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .signup-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .signup-box input {
+            background-color: #F5F5F5;
+            border: none;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .signup-box input:focus {
+            outline: 2px solid #00FF7F;
+        }
+
+        .error-message {
+            color: #FF6F00;
+            font-size: 12px;
+            text-align: left;
+            margin: -5px 0 10px 0;
+        }
+
+        .signup-box button {
+            background-color: #00FF7F;
+            color: #1E1E3F;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .signup-box button:hover {
+            background-color: #007BFF;
+            color: #F5F5F5;
+        }
+
+        .signup-box .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #F5F5F5;
+        }
+
+        .signup-box .login-link a {
+            color: #00FF7F;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-box .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Signup Page -->
+    <div class="signup-container">
+        <div class="signup-box">
+            <h1>Sign Up</h1>
+            <form id="signupForm">
+                <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+                <div id="firstnameError" class="error-message"></div>
+
+                <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+                <div id="lastnameError" class="error-message"></div>
+
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div id="emailError" class="error-message"></div>
+
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <div id="passwordError" class="error-message"></div>
+
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                <div id="confirmPasswordError" class="error-message"></div>
+
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number (optional)">
+                <div id="phoneError" class="error-message"></div>
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <div class="login-link">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get form values
+            const firstname = document.getElementById('firstname');
+            const lastname = document.getElementById('lastname');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const phone = document.getElementById('phone');
+
+            const firstnameError = document.getElementById('firstnameError');
+            const lastnameError = document.getElementById('lastnameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const phoneError = document.getElementById('phoneError');
+
+            let isValid = true;
+
+            // First name validation
+            if (firstname.value.trim() === "") {
+                firstnameError.textContent = "First name is required.";
+                firstname.style.border = "2px solid #FF6F00";
+                isValid = false;
+            } else {
+                firstnameError.textContent = "";
+                firstname.style.border = "2px solid #00FF7F";
+            }
+
+            // Last name validation
+            if (lastname.value.trim() === "") {
+                lastnameError.textContent = "Last name is required.";
+                lastname.style.border = "2px solid #FF6F00";
+                isValid = false;
+            } else {
+                lastnameError.textContent = "";
+                lastname.style.border = "2px solid #00FF7F";
+            }
+
+            // Email validation
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email.value.match(emailRegex)) {
+                emailError.textContent = "Invalid email address.";
+                email.style.border = "2px solid #FF6F00";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+                email.style.border = "2px solid #00FF7F";
+            }
+
+            // Password validation
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!password.value.match(passwordRegex)) {
+                passwordError.textContent = "Password must be at least 8 characters, include an uppercase, a lowercase, a number, and a special character.";
+                password.style.border = "2px solid #FF6F00";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+                password.style.border = "2px solid #00FF7F";
+            }
+
+            // Confirm password validation
+            if (confirmPassword.value !== password.value) {
+                confirmPasswordError.textContent = "Passwords do not match.";
+                confirmPassword.style.border = "2px solid #FF6F00";
+                isValid = false;
+            } else {
+                confirmPasswordError.textContent = "";
+                confirmPassword.style.border = "2px solid #00FF7F";
+            }
+
+            // Phone number validation (optional)
+            const phoneRegex = /^[0-9]{10,15}$/;
+            if (phone.value.trim() !== "" && !phone.value.match(phoneRegex)) {
+                phoneError.textContent = "Invalid phone number format.";
+                phone.style.border = "2px solid #FF6F00";
+                isValid = false;
+            } else {
+                phoneError.textContent = "";
+                phone.style.border = phone.value.trim() === "" ? "" : "2px solid #00FF7F";
+            }
+
+            // If form is valid
+            if (isValid) {
+                alert('Signup successful! (Simulated)');
+                // this.submit(); // Uncomment to submit to a backend
+            }
+        });
+    </script>
+</body>
+</html>
